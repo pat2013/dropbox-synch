@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.androidsync"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+    <!-- Your application must request permission to use a device camera. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- The application uses at least one camera facing in any direction. Use this in preference to android.hardware.camera if a back-facing camera is not required. -->
+    <uses-feature android:name="android.hardware.camera.any" />
+    <!-- The application uses 802.11 networking (wifi) features on the device. -->
+    <uses-feature android:name="android.hardware.wifi" />
+    <!-- If your application tags images with GPS location information, you must request location permission -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- To access the internet from my app -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Allows applications to access information about networks -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.androidsync.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.example.androidsync.PhotoReceiver" >
+            <intent-filter>
+                <action android:name="com.android.camera.NEW_PICTURE" />
+
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name="com.dropbox.sync.android.DbxAuthActivity" />
+        <activity
+            android:name="com.dropbox.client2.android.AuthActivity"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <data android:scheme="db-phfvfwmfhbccv0i" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.dropbox.sync.android.DbxSyncService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="Dropbox Sync" />
+        <!--
+   <activity android:name="com.example.androidsync.DropboxActivity" android:label="@string/app_name">
+   </activity>
+        -->
+        <activity
+            android:name="com.example.androidsync.CommentActivity"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="@string/app_name" >
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,2 @@
+# Replace the path below with the correct path on your system
+doc=C:\Users\krishna\Desktop\MS-Nirupa\SJSU\Fall2013\CMPE 273\dropbox-android-sync-sdk-2.0.2\javadoc
